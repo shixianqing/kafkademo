@@ -17,7 +17,7 @@ public class CustomerProducer {
         Properties props = new Properties();
 
         //kafka集群
-        props.put("bootstrap.servers","192.168.220.128:9092,192.168.220.129:9092,192.168.220.134:9092");
+        props.put("bootstrap.servers","192.168.86.131:9092,192.168.86.132:9092,192.168.86.134:9092");
         props.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
         //等待所有副本节点的应答
@@ -34,7 +34,7 @@ public class CustomerProducer {
         KafkaProducer<String,String> producer = new KafkaProducer<String, String>(props);
 
         for (int i=0; i< 10; i++){
-            producer.send(new ProducerRecord<String, String>("second","hello"+i));
+            producer.send(new ProducerRecord<String, String>("first","hello"+i));
         }
 
         producer.close();

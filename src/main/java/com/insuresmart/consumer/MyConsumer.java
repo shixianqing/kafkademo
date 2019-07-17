@@ -31,6 +31,7 @@ public class MyConsumer {
         // 消息发送失败最大尝试次数
         props.put("key.deserializer",PropsUtils.getString("key.deserializer"));
         props.put("value.deserializer",PropsUtils.getString("value.deserializer"));
+        props.put("max.poll.records",PropsUtils.getString("max.poll.records"));
 
         //创建消费者
         KafkaConsumer<String,String> consumer = new KafkaConsumer<String, String>(props);

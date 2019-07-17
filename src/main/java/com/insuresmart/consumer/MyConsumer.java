@@ -23,6 +23,8 @@ public class MyConsumer {
         //kafka集群
         props.put("bootstrap.servers", PropsUtils.getString("bootstrap.servers"));
         props.put("group.id",PropsUtils.getString("group.id"));
+
+        //考虑手动提交偏移量
         props.put("enable.auto.commit",PropsUtils.getString("enable.auto.commit"));
         //等待所有副本节点的应答
         props.put("auto.commit.interval.ms",PropsUtils.getString("auto.commit.interval.ms"));
@@ -39,6 +41,7 @@ public class MyConsumer {
         //读数据
         while (true){
             ConsumerRecords<String, String> consumerRecords = consumer.poll(100);
+            consumer.commitAsync();
             Iterator<ConsumerRecord<String, String>> iterator = consumerRecords.iterator();
             while (iterator.hasNext()){
                 ConsumerRecord<String, String> next = iterator.next();
